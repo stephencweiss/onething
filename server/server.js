@@ -1,6 +1,6 @@
 import express from 'express'
 import { json, urlencoded } from 'body-parser'
-import path from "path"
+import path from 'path'
 import morgan from 'morgan'
 import config from './config'
 import cors from 'cors'
@@ -15,7 +15,7 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
-app.use('/', express.static(path.join(__dirname,'../client/dist')))
+app.use('/', express.static(path.join(__dirname, '../client/dist')))
 
 mountRoutes(app)
 

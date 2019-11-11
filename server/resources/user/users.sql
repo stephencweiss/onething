@@ -1,5 +1,5 @@
-CREATE TABLE
-IF NOT EXISTS users
+DROP TABLE users;
+CREATE TABLE users
 (
   ID SERIAL PRIMARY KEY,
   name text,

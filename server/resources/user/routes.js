@@ -1,14 +1,22 @@
 import Router from 'express-promise-router'
-import {createUser, updateUser, deleteUser, getUserById, getUsers} from './controller'
-const userRouter = new Router();
+import {
+  createUser,
+  updateUser,
+  deleteUser,
+  getUserById,
+  getUsers,
+} from './controller'
+const userRouter = new Router()
 
-userRouter.route('/')
+userRouter
+  .route('/')
   .get(getUsers)
   .post(createUser)
 
-userRouter.route('/:id')
+userRouter
+  .route('/:id')
   .get(getUserById)
   .patch(updateUser)
   .delete(deleteUser)
 
-export default userRouter;
+export default userRouter
