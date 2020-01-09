@@ -1,6 +1,6 @@
 // TODO: change new jwt secret...
 
-export const config = {
+const config = {
   secrets: {
     jwt: 'learneverything',
   },
@@ -12,3 +12,5 @@ export const config = {
     port: 5432,
   },
 }
+
+module.exports = { config }

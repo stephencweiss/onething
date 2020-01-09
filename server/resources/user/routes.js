@@ -1,11 +1,11 @@
-import Router from 'express-promise-router'
-import {
+const Router = require('express-promise-router')
+const {
   createUser,
   updateUser,
   deleteUser,
   getUserById,
   getUsers,
-} from './controller'
+} = require('./controller')
 const userRouter = new Router()
 
 userRouter
@@ -19,4 +19,4 @@ userRouter
   .patch(updateUser)
   .delete(deleteUser)
 
-export default userRouter
+module.exports = userRouter

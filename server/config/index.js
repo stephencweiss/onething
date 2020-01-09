@@ -1,4 +1,4 @@
-import { merge } from 'lodash'
+const { merge } = require('lodash')
 const env = process.env.NODE_ENV || 'development'
 
 const baseConfig = {
@@ -27,4 +27,4 @@ switch (env) {
     envConfig = require('./dev').config
 }
 
-export default merge(baseConfig, envConfig)
+module.exports = merge(baseConfig, envConfig)

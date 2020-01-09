@@ -1,7 +1,7 @@
-import { pool } from '../../db'
-import SQL from 'sql-template-strings'
+const SQL = require('sql-template-strings')
+const { pool } = require('../../db')
 
-export const getUsers = async (req, res) => {
+const getUsers = async (req, res) => {
   // TODO: Determine how to handle passwords so that we're not sending them back
   try {
     const { rows } = await pool.query(
@@ -13,7 +13,7 @@ export const getUsers = async (req, res) => {
   }
 }
 
-export const getUserById = async (req, res) => {
+const getUserById = async (req, res) => {
   // TODO: Determine how to handle passwords so that we're not sending them back
   const { id } = req.params
   try {
@@ -26,7 +26,7 @@ export const getUserById = async (req, res) => {
   }
 }
 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   //TODO: Add Hashing for passwords
 
   const { name, email, password } = req.body
@@ -42,7 +42,7 @@ export const createUser = async (req, res) => {
   }
 }
 
-export const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
   //TODO: Add Hashing for passwords
   const { id, name, email, password } = req.body
   try {
@@ -60,7 +60,7 @@ export const updateUser = async (req, res) => {
   }
 }
 
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
   // TODO: Add support for softDelete
   const { id } = req.params
   try {
@@ -73,3 +73,5 @@ export const deleteUser = async (req, res) => {
     throw new Error(error)
   }
 }
+
+module.exports = { getUsers, getUserById, deleteUser, createUser, updateUser }
