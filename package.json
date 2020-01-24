@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "build": "babel server --out-dir dist",
-    "dev": "nodemon --exec npm run restart",
+    "dev:server": "nodemon --exec npm run restart",
+    "dev:web": "cd web && npm run start",
     "restart": "rimraf dist && npm run build && npm run start",
     "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
