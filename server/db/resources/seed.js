@@ -20,56 +20,69 @@ const createSchedule = ({ userId, templateId }) => {
     'WEEKLY',
     'MONTHLY',
   ])}'`
-  const startDate = Date.now()
-  return `(${userId},${templateId},${frequency},${startDate})`
+  return `(${userId},${templateId},${frequency},current_timestamp)`
 }
 
-const bulkAddUsers = async () => {
-  console.log(`start --> `)
+const seedDB = async () => {
+  console.log(`start seedDB --> `)
   const users = []
   const templates = []
   const schedules = []
-  for (let i = 0; i < 10; i += 1) {
+  for (let i = 1; i < 10; i += 1) {
     users.push(createUser())
-    for (let j = 0; j < faker.random.number({ min: 1, max: 3 }); j += 1) {
+    for (let j = 1; j < faker.random.number({ min: 2, max: 3 }); j += 1) {
       templates.push(createTemplate({ userId: i }))
       schedules.push(createSchedule({ userId: i, templateId: j }))
     }
   }
 
-  const query = SQL`
+  const userQuery = SQL`
   INSERT INTO users
   (name, email)
   VALUES
 `
-  query.append(users.join(',')).append(';')
+  userQuery.append(users.join(',')).append(';')
 
-  const childQuery = SQL`
+  const templateQuery = SQL`
     INSERT INTO templates
     (owner_id, body, public)
     VALUES
   `
 
-  childQuery
-    .append(templates.join(','))
-    .append(';')
-    .append(
-      `
+  templateQuery.append(templates.join(',')).append(';')
+
+  const scheduleQuery = SQL`
     INSERT INTO schedules
     (owner_id, template_id, frequency, start_date)
     VALUES
   `
-    )
     .append(schedules.join(','))
+    .append(';')
 
   console.log(
     `dummy data --> \n`,
-    JSON.stringify({ users, templates, schedules }, null, 2)
+    JSON.stringify(
+      { users, userQuery, templates, templateQuery, schedules, scheduleQuery },
+      null,
+      2
+    )
   )
 
-//   const results = await pool.query(query)
-  const childResults = await pool.query(childQuery)
-  console.log(`finished!`, JSON.stringify({ results, childResults }, null, 2))
+  const results = await pool
+    .query(userQuery)
+    .catch(error => console.error(`error with users -->\n`, error))
+
+  const templateResults = await pool
+    .query(templateQuery)
+    .catch(error => console.error(`error with templates -->\n`, error))
+  const scheduleResults = await pool
+    .query(scheduleQuery)
+    .catch(error => console.error(`error with schedules -->\n`, error))
+
+  console.log(
+    `finished seedDB! -->\n`,
+    JSON.stringify({ results, scheduleResults, templateResults }, null, 2)
+  )
 }
 
-bulkAddUsers()
+seedDB()
