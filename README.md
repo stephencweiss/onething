@@ -11,14 +11,17 @@ $ npm i
 $ cd client && npm i
 ```
 
+Be sure you've also created the database and [seeded it](./server/db/resources/seed.readme.md)
+
 ### Running
+
 To run the front- and back-ends in parallel:
 ```sh
-$ npm run dev
+$ npm run dev:server
 ```
 Then open a new terminal:
 ```sh
-$ cd client && npm run start
+$ npm run dev:web
 ```
 
 In the future, I may tie these together into a single command or orchestrate with something like Lerna.
