@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import { Preview } from './preview'
-interface iEditor {
-  text: string
-}
 
-export function EditorContainer(params: iEditor) {
+export function Editor() {
   const [markdownSrc, setMarkdownSrc] = useState('')
   const handleChange = ({ target }: { target: HTMLTextAreaElement }) => {
     if (target) {
@@ -13,12 +10,8 @@ export function EditorContainer(params: iEditor) {
   }
   return (
     <>
-      <Editor value={markdownSrc} onChange={handleChange} />
+      <textarea onChange={handleChange}></textarea>
       <Preview text={markdownSrc} />
     </>
   )
-}
-
-export function Editor(props) {
-  return <textarea onChange={props.onChange}></textarea>
 }
