@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { EditorContainer } from '../components/md-editor/editor'
 
 const Home = () => (
   <>
@@ -12,7 +13,15 @@ const Home = () => (
       <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'></link>
       <meta charSet='utf-8'></meta>
     </Head>
-    <div>Hello, world</div>
+    <div>
+      <nav>
+        <h1>One Thing</h1>
+        <button onClick={() => alert('coming soon!')}>menu</button>
+      </nav>
+      <main>
+        <EditorContainer />
+      </main>
+    </div>
   </>
 )
 
