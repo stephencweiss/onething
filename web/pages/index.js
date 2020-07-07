@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { EditorContainer } from '../components/md-editor/editor'
+import { Editor } from '../components/md-editor/editor'
 
 const Home = () => (
   <>
@@ -19,7 +19,7 @@ const Home = () => (
         <button onClick={() => alert('coming soon!')}>menu</button>
       </nav>
       <main>
-        <EditorContainer />
+        <Editor />
       </main>
     </div>
   </>
